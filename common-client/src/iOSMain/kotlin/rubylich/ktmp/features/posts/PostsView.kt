@@ -1,29 +1,23 @@
 package rubylich.ktmp.features.posts
 
 import kotlinx.cinterop.ExportObjCClass
-import kotlinx.cinterop.ObjCOutlet
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import platform.Foundation.NSCoder
-import platform.Foundation.NSIndexPath
-import platform.UIKit.*
-import platform.darwin.NSInteger
 
 @ExperimentalCoroutinesApi
 @ExportObjCClass
-actual class PostsView @OverrideInit constructor(coder: NSCoder) : IPostsView, UIViewController(coder) {
+actual class PostsView constructor() : IPostsView/*, UIViewController(coder) */{
 
-    @ObjCOutlet
-    lateinit var tableView: UITableView
+    /*@ObjCOutlet
+    lateinit var tableView: UITableView*/
 
-    private val dialogContentChannel = ConflatedBroadcastChannel<String>()
+    /*private val dialogContentChannel = ConflatedBroadcastChannel<String>()
     private val refreshChannel = ConflatedBroadcastChannel<Unit>()
     private val addPostButtonChannel = ConflatedBroadcastChannel<Unit>()
     private lateinit var postRepo: PostsRepo
-    private var posts = listOf<Post>()
+    private var posts = listOf<Post>()*/
 
-    external override fun viewDidLoad() {
+   /* external override fun viewDidLoad() {
         super.viewDidLoad()
         postRepo = PostsRepo()
 
@@ -42,20 +36,20 @@ actual class PostsView @OverrideInit constructor(coder: NSCoder) : IPostsView, U
 //
 //        }
 
-    }
+    }*/
 
-    actual override fun showPosts(posts: List<Post>) {
-        this.posts = posts
-        tableView.reloadData()
-    }
+    /*actual override fun showPosts(posts: List<Post>) {
+//        this.posts = posts
+//        tableView.reloadData()
+    }*/
 
     actual override fun showAddPostDialog() {
-        val alert = UIAlertController("Create Post", null)
+       /* val alert = UIAlertController("Create Post", null)
         alert.addAction(UIAlertAction.actionWithTitle("Cancel", 0, null))
 
         alert.addTextFieldWithConfigurationHandler {
                 it?.placeholder = "Post content..."
-        }
+        }*/
 
 //        alert.addAction(UIAlertAction.actionWithTitle("Create", 0) {
 //            if let content = alert.textFields?.first?.text, !content.isEmpty {
@@ -81,4 +75,6 @@ actual class PostsView @OverrideInit constructor(coder: NSCoder) : IPostsView, U
     }
 
     actual override fun showRefresh(show: Boolean) {}
+  actual override fun showPosts(posts: List<Post>) {
+  }
 }
