@@ -183,13 +183,14 @@ task firebaseDeployLocaly(type: Exec) {
     commandLine 'firebase', 'functions:shell'
 }
 
-task serializationRefToLocalModule << {
-
+task serializationRefToLocalModule {
+  doLast {
     def serialization = 'kotlinx-serialization-runtime-js'
 
     ant.replaceregexp(match: "$serialization", replace: "../../$serialization-0.9.0/$serialization", flags: 'g', byline: true) {
-        fileset(dir: "$firebaseFunctionsMain", includes: kotlinJsOutputFile)
+      fileset(dir: "$firebaseFunctionsMain", includes: kotlinJsOutputFile)
     }
+  }
 }
 
 //firebaseTest
