@@ -2,4 +2,4 @@ rootProject.name = 'kotlin-multiplatform-firebase'
 
 enableFeaturePreview('GRADLE_METADATA')
 
-include 'common-all', 'common-client', 'android:app'
+include 'common-all'//, 'common-client', 'android:app'
