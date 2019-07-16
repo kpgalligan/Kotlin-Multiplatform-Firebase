@@ -16,12 +16,12 @@ actual abstract class BaseRepo<T : Any> actual constructor(
     private val collection = FIRFirestore.firestore().collectionWithPath(ref)
 
     actual override suspend fun getAll(): List<T> {
-        return awaitCallback { cont ->
+        return awaitCallback { callback ->
             collection.getDocumentsWithCompletion { document, error ->
                 if (error != null) {
-                    cont.onError(Exception(error.localizedDescription))
+                    callback.onError(Exception(error.localizedDescription))
                 } else {
-                    cont.onComplete(document!!.documents.filterNotNull().map(parser::parse))
+                    callback.onComplete(document!!.documents.filterNotNull().map(parser::parse))
                 }
             }
         }
